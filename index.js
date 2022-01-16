@@ -50,8 +50,7 @@ app.put("/spots/:id", async (req, res) => {
     const { id } = req.params;
     const { address } = req.body;
     const updateAddress = await pool.query("UPDATE practiceSpots SET address = $1 WHERE spot_id = $2", [address, id]);
-    // res.json(`address updated: ${updateAddress}`);
-    console.log(updateAddress)
+    res.json("address updated");
   } catch (error) {
     console.log(error.message);
   }
@@ -62,7 +61,7 @@ app.delete("/spots/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const deleteAddress = await pool.query("DELETE FROM practiceSpots WHERE spot_id = $1", [id]);
-    res.json("address deleted")
+    res.json("address deleted");
   } catch (error) {
     console.log(error.message);
   }

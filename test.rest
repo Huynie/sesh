@@ -15,7 +15,7 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:5000/spots/7 HTTP/1.1
+PUT http://localhost:5000/spots/6 HTTP/1.1
 content-type: application/json
 
 {
