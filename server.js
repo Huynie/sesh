@@ -1,4 +1,4 @@
-// require("dotenv").config();
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -68,7 +68,7 @@ app.delete("/spots/:id", async (req, res) => {
   }
 })
 
-const port = process.env.PORT || 4001
-app.listen(port, () => {
-  console.log("server has started on port" + port)
+const PORT = process.env.PORT || 4001
+app.listen(PORT, () => {
+  console.log("server has started on port" + PORT)
 });
