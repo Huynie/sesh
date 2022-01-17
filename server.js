@@ -70,5 +70,5 @@ app.delete("/spots/:id", async (req, res) => {
 
 const port = process.env.PORT || 4001
 app.listen(port, () => {
-  console.log("server has started on port 5000")
+  console.log("server has started on port" + port)
 });
