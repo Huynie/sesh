@@ -14,7 +14,7 @@ const pg = require("pg");
 const client = new pg.Client("postgres://rahuymnn:MRK7ZZxED7LDgbQFB2CYx9M9BrRDMVtn@kashin.db.elephantsql.com/rahuymnn");
 
 client.connect((error) => {
-  error ? console.log(error) : console.log("Database connected.");
+  error ? console.log(error) : console.log("Client connected.");
 });
 
 // const connect = async (client) => {
@@ -63,6 +63,7 @@ app.get("/spots", async (req, res) => {
   try {
     const allSpots = await client.query("SELECT * FROM practiceSpots");
     res.json(allSpots.rows);
+    res.send(allSpots.rows);
     console.table(allSpots.rows);
   } catch (error) {
     console.log(error.message);
@@ -75,6 +76,7 @@ app.get("/spots/:id", async (req, res) => {
     const { id } = req.params;
     const spot = await client.query("SELECT * FROM practicespots WHERE spot_id = $1", [id]);
     res.json(spot.rows[0]);
+    res.send(spot.rows);
   } catch (error) {
     console.log(error.message);
   }
@@ -88,6 +90,7 @@ app.put("/spots/:id", async (req, res) => {
     const { address } = req.body;
     const updateAddress = await client.query("UPDATE practiceSpots SET address = $1 WHERE spot_id = $2", [address, id]);
     res.json("address updated");
+    res.send(`Address updated. ${updateAddress}`);
   } catch (error) {
     console.log(error.message);
   }
