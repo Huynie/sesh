@@ -1,0 +1,27 @@
+GET http://localhost:5000/spots HTTP/1.1
+
+###
+
+GET http://localhost:5000/spots/7 HTTP/1.1
+
+###
+
+POST http://localhost:5000/spots HTTP/1.1
+content-type: application/json
+
+{
+    "address": "sample address 6"
+}
+
+###
+
+PUT http://localhost:5000/spots/6 HTTP/1.1
+content-type: application/json
+
+{
+    "address": "sample address 6"
+}
+###
+
+DELETE  http://localhost:5000/spots/7 HTTP/1.1
+content-type: application/json

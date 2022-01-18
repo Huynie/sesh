@@ -1,3 +1,9 @@
 # NPM
 /node_modules/
 
+#ENV
+.env
+
+#REST CLIENT
+.REST
+.http
