@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require('express');
 const app = express();
 const cors = require("cors");
-// const pool = require("./db");
 
 //middleware
 app.use(cors());
@@ -11,36 +10,16 @@ app.use(express.json()); //req.body
 //ROUTES//
 const pg = require("pg");
 
-const client = new pg.Client("postgres://rahuymnn:MRK7ZZxED7LDgbQFB2CYx9M9BrRDMVtn@kashin.db.elephantsql.com/rahuymnn");
+const client = new pg.Client(process.env.CLIENT);
 
 client.connect((error) => {
   error ? console.log(error) : console.log("Client connected.");
 });
 
-// const connect = async (client) => {
-//   try {
-//     await client.connect();
-//     console.log('client connected.');
-
-//     const { rows } = await client.query('SELECT * FROM practiceSpots');
-//     console.table(rows);
-//     console.log(rows);
-//     await client.end();
-
-//   } catch (error) {
-//     console.log(error)
-//   } 
-//   finally {
-//       await client.end()
-//   }
-// }
-
-// connect(client);
-
 //server homepage
 app.get("/", (req,res) => {
   try {
-    res.send("Sesh app backend server via NodeJS, Express, and PostgresSQL")
+    res.send("Sesh app backend server via NodeJS, Express, and PostgresSQL");
   } catch (error) {
     console.log(error);
   }
