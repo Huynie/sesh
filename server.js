@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require('express');
 const app = express();
 const cors = require("cors");
-const pool = require("./db");
+// const pool = require("./db");
 
 
 //middleware
@@ -22,13 +22,15 @@ const connect = async (client) => {
 
     const { rows } = await client.query('SELECT * FROM practiceSpots');
     console.table(rows);
-    await client.end();
+    console.log(rows);
+    // await client.end();
 
   } catch (error) {
     console.log(error)
-  } finally {
-      await client.end()
-  }
+  } 
+  // finally {
+  //     await client.end()
+  // }
 }
 
 connect(client);
