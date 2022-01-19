@@ -7,3 +7,9 @@
 #REST CLIENT
 .REST
 .http
+
+#pg pool
+db.js
+
+#sql
+.sql
