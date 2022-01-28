@@ -1,12 +1,12 @@
-GET http://localhost:5000/spots HTTP/1.1
+GET http://localhost:3001/spots HTTP/1.1
 
 ###
 
-GET http://localhost:5000/spots/7 HTTP/1.1
+GET http://localhost:3001/spots/7 HTTP/1.1
 
 ###
 
-POST http://localhost:5000/spots HTTP/1.1
+POST http://localhost:3001/spots HTTP/1.1
 content-type: application/json
 
 {
@@ -15,13 +15,19 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:5000/spots/6 HTTP/1.1
+PUT http://localhost:3001/spots/6 HTTP/1.1
 content-type: application/json
 
 {
-    "address": "sample address 6"
+    "address" : "5154 W Patrick Ln suite 110A, Las Vegas, NV 89118",
+    "name": "Alchemy Breaking",
+    "price" : 5,
+    "coord_lng": 12,
+    "coord_lat": 13,
+    "host": "ATN"
+
 }
 ###
 
-DELETE  http://localhost:5000/spots/7 HTTP/1.1
+DELETE  http://localhost:3001/spots/7 HTTP/1.1
 content-type: application/json

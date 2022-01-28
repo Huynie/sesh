@@ -41,7 +41,6 @@ app.get("/spots", async (req, res) => {
   try {
     const allSpots = await client.query("SELECT * FROM practiceSpots");
     res.json(allSpots.rows);
-    res.send(allSpots.rows);
     console.table(allSpots.rows);
   } catch (error) {
     console.log(error.message);
@@ -54,7 +53,7 @@ app.get("/spots/:id", async (req, res) => {
     const { id } = req.params;
     const spot = await client.query("SELECT * FROM practicespots WHERE spot_id = $1", [id]);
     res.json(spot.rows[0]);
-    res.send(spot.rows);
+    console.log(spot.rows);
   } catch (error) {
     console.log(error.message);
   }
@@ -65,10 +64,10 @@ app.get("/spots/:id", async (req, res) => {
 app.put("/spots/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { address } = req.body;
-    const updateAddress = await client.query("UPDATE practiceSpots SET address = $1 WHERE spot_id = $2", [address, id]);
+    const { address, name, price, coord_lng, coord_lat, host } = req.body;
+    const updateAddress = await client.query("UPDATE practiceSpots SET address = $2, name = $3, price = $4, coord_lng = $5, coord_lat = $6, host = $7 WHERE spot_id = $1", [id, address,  name, price, coord_lng, coord_lat, host]);
     res.json("address updated");
-    res.send(`Address updated. ${updateAddress}`);
+    console.log(`Address updated. ${updateAddress}`);
   } catch (error) {
     console.log(error.message);
   }
