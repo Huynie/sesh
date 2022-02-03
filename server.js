@@ -27,9 +27,9 @@ app.get("/", (req,res) => {
 //create spot
 app.post("/spots", async (req, res) => {
   try {
-    const { address } = req.body;
-    const newAddress = await client.query("INSERT INTO practiceSpots (address) VALUES($1) RETURNING *", [address]);
-    res.json(newAddress.rows[0]);
+    const { name, address, phone, host, price } = req.body;
+    const newSpot = await client.query("INSERT INTO practiceSpots (name, address, phone, host, price) VALUES($1, $2, $3, $4, $5, $6) RETURNING *", [name, address, phone, host, price]);
+    res.json(newSpot.rows[0]);
   } catch (error) {
     console.log(error.message);
   }
@@ -64,10 +64,10 @@ app.get("/spots/:id", async (req, res) => {
 app.put("/spots/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { address, name, price, coord_lng, coord_lat, host } = req.body;
-    const updateAddress = await client.query("UPDATE practiceSpots SET address = $2, name = $3, price = $4, coord_lng = $5, coord_lat = $6, host = $7 WHERE spot_id = $1", [id, address,  name, price, coord_lng, coord_lat, host]);
+    const { name, address, phone, host, price } = req.body;
+    const updateSpot = await client.query("UPDATE practiceSpots SET address = $2, name = $3, price = $4, coord_lng = $5, coord_lat = $6, host = $7 WHERE spot_id = $1", [id, name, address, phone, host, price]);
     res.json("address updated");
-    console.log(`Address updated. ${updateAddress}`);
+    console.log(`Address updated. ${updateSpot}`);
   } catch (error) {
     console.log(error.message);
   }
@@ -77,8 +77,68 @@ app.put("/spots/:id", async (req, res) => {
 app.delete("/spots/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteAddress = await client.query("DELETE FROM practiceSpots WHERE spot_id = $1", [id]);
-    res.json("address deleted");
+    const deleteSpot = await client.query("DELETE FROM practiceSpots WHERE spot_id = $1", [id]);
+    res.json("spot deleted");
+  } catch (error) {
+    console.log(error.message);
+  }
+})
+
+//create spot hours
+app.post("/spothours", async (req, res) => {
+  try {
+    const { sun, mon, tues, wed, thurs, fri, sat } = req.body;
+    const newHours = await client.query("INSERT INTO spothours (sun, mon, tues, wed, thurs, fri, sat) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *", [sun, mon, tues, wed, thurs, fri, sat]);
+    res.json(newHours.rows[0]);
+  } catch (error) {
+    console.log(error.message);
+  }
+})
+
+
+//get all spots hours
+app.get("/spothours", async (req, res) => {
+  try {
+    const allSpots = await client.query("SELECT * FROM spothours");
+    res.json(allSpots.rows);
+    console.table(allSpots.rows);
+  } catch (error) {
+    console.log(error.message);
+  }
+})
+
+//get 1 spots hour
+app.get("/spothours/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const spot = await client.query("SELECT * FROM spothours WHERE spot_id = $1", [id]);
+    res.json(spot.rows[0]);
+    console.log(spot.rows);
+  } catch (error) {
+    console.log(error.message);
+  }
+})
+
+
+//update spot hours
+app.put("/spothours/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { sun, mon, tues, wed, thurs, fri, sat } = req.body;
+    const updateHours = await client.query("UPDATE spothours SET address = $2, name = $3, price = $4, coord_lng = $5, coord_lat = $6, host = $7 WHERE spot_id = $1", [id, sun, mon, tues, wed, thurs, fri, sat]);
+    res.json("address updated");
+    console.log(`Hours updated. ${updateHours}`);
+  } catch (error) {
+    console.log(error.message);
+  }
+})
+
+//delete spot hours
+app.delete("/spothours/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteHours = await client.query("DELETE FROM spothours WHERE spot_id = $1", [id]);
+    res.json("Hours deleted");
   } catch (error) {
     console.log(error.message);
   }

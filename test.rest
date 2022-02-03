@@ -2,7 +2,7 @@ GET http://localhost:3001/spots HTTP/1.1
 
 ###
 
-GET http://localhost:3001/spots/7 HTTP/1.1
+GET http://localhost:3001/spots/6 HTTP/1.1
 
 ###
 
@@ -15,16 +15,16 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:3001/spots/6 HTTP/1.1
+PUT http://localhost:3001/spots/8 HTTP/1.1
 content-type: application/json
 
 {
-    "address" : "5154 W Patrick Ln suite 110A, Las Vegas, NV 89118",
-    "name": "Alchemy Breaking",
+    "address" : "9710 W Tropicana Ave Suite 100, Las Vegas, NV 89147",
+    "name": "Distrct Art",
     "price" : 5,
     "coord_lng": 12,
     "coord_lat": 13,
-    "host": "ATN"
+    "host": "Devian"
 
 }
 ###
