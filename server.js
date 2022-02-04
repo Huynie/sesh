@@ -27,8 +27,9 @@ app.get("/", (req,res) => {
 //create spot
 app.post("/spots", async (req, res) => {
   try {
-    const { name, address, phone, host, price } = req.body;
-    const newSpot = await client.query("INSERT INTO practiceSpots (name, address, phone, host, price) VALUES($1, $2, $3, $4, $5, $6) RETURNING *", [name, address, phone, host, price]);
+    const { name, address, phone, host, price, waiver } = req.body;
+    console.log(req.body, name)
+    const newSpot = await client.query("INSERT INTO practiceSpots (name, address, phone, host, price, waiver) VALUES($1, $2, $3, $4, $5, $6) RETURNING *", [name, address, phone, host, price, waiver]);
     res.json(newSpot.rows[0]);
   } catch (error) {
     console.log(error.message);

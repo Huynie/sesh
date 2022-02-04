@@ -1,4 +1,4 @@
-GET http://localhost:3001/spots HTTP/1.1
+GET http://localhost:3001/spothours HTTP/1.1
 
 ###
 
@@ -10,7 +10,27 @@ POST http://localhost:3001/spots HTTP/1.1
 content-type: application/json
 
 {
-    "address": "sample address 6"
+    "name": "Test Spot",
+    "address": "sample address 6",
+    "phone": "555-5555",
+    "host": "Test Host",
+    "price": "5",
+    "waiver": true
+}
+###
+
+POST http://localhost:3001/spothours HTTP/1.1
+content-type: application/json
+
+{
+    "sun": null,
+    "mon": null,
+    "tues": null,
+    "wed": null,
+    "thurs": null,
+    "fri": null,
+    "sat": null,
+    "spot_id": 0
 }
 
 ###
