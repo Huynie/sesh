@@ -87,8 +87,8 @@ app.delete("/spots/:id", async (req, res) => {
 //create spot hours
 app.post("/spothours", async (req, res) => {
   try {
-    const { sun, mon, tues, wed, thurs, fri, sat } = req.body;
-    const newHours = await client.query("INSERT INTO spothours (sun, mon, tues, wed, thurs, fri, sat) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *", [sun, mon, tues, wed, thurs, fri, sat]);
+    const {spot_id, sun, mon, tues, wed, thurs, fri, sat} = req.body;
+    const newHours = await client.query("INSERT INTO spothours (spot_id, sun, mon, tues, wed, thurs, fri, sat) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *", [spot_id, sun, mon, tues, wed, thurs, fri, sat]);
     res.json(newHours.rows[0]);
   } catch (error) {
     console.log(error.message);
