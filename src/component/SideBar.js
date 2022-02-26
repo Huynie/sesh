@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { 
-  Carousel,
-  CarouselItem,
+  // Carousel,
+  // CarouselItem,
   Button,
   Card,
   CardBody,
   CardTitle,
   CardSubtitle,
   CardText,
-  CardImg,
+  // CardImg,
   List,
-  ListGroup,
-  ListGroupItem,
+  // ListGroup,
+  // ListGroupItem,
   Accordion,
   AccordionItem,
   AccordionBody,
@@ -70,7 +70,7 @@ const SideBar = React.forwardRef( ({data}, ref) => {
             <AccordionBody accordionId="1">
                 {
                   data && Object.keys(data.hours).map((hour, idx) => {
-                    return hour != "spot_id" && data.hours[hour] != null ? (
+                    return hour !== "spot_id" && data.hours[hour] != null ? (
                       <CardText key={idx} tag="p">
                         {hour}: {data.hours[hour]}
                       </CardText>

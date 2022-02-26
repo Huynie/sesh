@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef, useCallback} from 'react';
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { Button, Spinner, Alert } from 'reactstrap';
 import { spotsData, addSpotAndHours } from './api';
@@ -8,15 +8,15 @@ import AddSpotModal from './AddSpotModal';
 // import 'dotenv';
 
 const MyMapComponent = ({center, zoom}) => {
-  const mapRef = React.useRef();
-  const sidebarRef = React.useRef();
-  const alertRef = React.useRef(null);
-  const [map, setMap] = React.useState(null);
-  const [spots, setSpots] = React.useState([]);
-  const [sidebarData, setSidebarData] = React.useState(null);
-  const [geocoder, setGeocoder] = React.useState();
-  const [addSpotModalToggle, setAddSpotModalToggle] = React.useState(false);
-  const [alert, setAlert] = React.useState({toggle: false, msg: null, color: 'success'});
+  const mapRef = useRef();
+  const sidebarRef = useRef();
+  const alertRef = useRef(null);
+  const [map, setMap] = useState(null);
+  const [spots, setSpots] = useState([]);
+  const [sidebarData, setSidebarData] = useState(null);
+  const [geocoder, setGeocoder] = useState();
+  const [addSpotModalToggle, setAddSpotModalToggle] = useState(false);
+  const [alert, setAlert] = useState({toggle: false, msg: null, color: 'success'});
 
   const toggleAlert = (msg, color) => {
     setAlert({toggle: true, msg, color});
@@ -25,40 +25,40 @@ const MyMapComponent = ({center, zoom}) => {
     }, 3000);
   };
 
-  const handleMarkerClick = React.useCallback(spot => () => {
-    if(!sidebarRef.current.id) {
-      setSidebarData(spot);
-      if(sidebarRef.current.style.right === '-50vw'){
-        document.querySelector('.sidebar__toggle').click();
-      }
-      sidebarRef.current.id = spot.spot_id;
-      return
-    }
-    if(sidebarRef.current.id == spot.spot_id) {
-      document.querySelector('.sidebar__toggle').click();
-      return
-    }
-    if(sidebarRef.current.id != spot.spot_id) {
-      if(sidebarRef.current.style.right === '-50vw') {
-        document.querySelector('.sidebar__toggle').click();
-      }
-      setSidebarData(spot);
-      sidebarRef.current.id = spot.spot_id;
-      return
-    }
-  });
 
-  const addMarker = async (spot) => {
+  const addMarker = useCallback( async (spot) => {
+    const handleMarkerClick = () => () => {
+      if(!sidebarRef.current.id) {
+        setSidebarData(spot);
+        if(sidebarRef.current.style.right === '-50vw'){
+          document.querySelector('.sidebar__toggle').click();
+        }
+        sidebarRef.current.id = spot.spot_id;
+        return
+      }
+      if(sidebarRef.current.id === spot.spot_id) {
+        document.querySelector('.sidebar__toggle').click();
+        return
+      }
+      if(sidebarRef.current.id !== spot.spot_id) {
+        if(sidebarRef.current.style.right === '-50vw') {
+          document.querySelector('.sidebar__toggle').click();
+        }
+        setSidebarData(spot);
+        sidebarRef.current.id = spot.spot_id;
+        return
+      }
+    };
     try {
       await geocoder.geocode({ 'address': spot.address }, (results, status) => {
-        if (status == 'OK') {
-          const marker = new google.maps.Marker({
+        if (status === 'OK') {
+          const marker = new window.google.maps.Marker({
             map,
             position: results[0].geometry.location,
             icon: "https://sesh-assets.s3.us-west-1.amazonaws.com/marker3.svg",
             title: spot.name
           });
-          marker.addListener("click", handleMarkerClick(spot));
+          marker.addListener("click", handleMarkerClick());
         }
       });
     } catch (error) {
@@ -66,7 +66,7 @@ const MyMapComponent = ({center, zoom}) => {
       console.log(error.message, spot.name);
     }
     //DO I NEED TO REMOVE CLICK HANDLER UPON UNMOUNT?
-  };
+  }, [map, sidebarRef, toggleAlert]);
 
   const addSpot = async (reqSpot, reqHours) => {
     try {
@@ -80,23 +80,26 @@ const MyMapComponent = ({center, zoom}) => {
     }
   };
 
-  React.useEffect(async() => {
-    try {
-      setSpots(await spotsData());
-      setMap(new google.maps.Map(mapRef.current, {
-        center,
-        zoom,
-        mapId: 'b2e6fec7d55d0a59',
-        disableDefaultUI: true
-        })
-      );
-      setGeocoder(new google.maps.Geocoder());
-    } catch (error) {
-      console.log(error.message)
+  useEffect(()=> {
+    const setData = async() => {
+      try {
+        setSpots(await spotsData());
+        setMap(new window.google.maps.Map(mapRef.current, {
+          center,
+          zoom,
+          mapId: 'b2e6fec7d55d0a59',
+          disableDefaultUI: true
+          })
+        );
+        setGeocoder(new window.google.maps.Geocoder());
+      } catch (error) {
+        console.log(error.message)
+      }
     }
-  },[]);
+    setData();
+  },[center, zoom]);
   
-  React.useEffect(() => {
+  useEffect(() => {
     spots.forEach((spot) => {
       if(geocoder) {
         addMarker(spot);
@@ -131,12 +134,12 @@ const MyMapComponent = ({center, zoom}) => {
           addSpot(spot, hours);
         }}
       />
-      {/* <Alert // triggers strictmode warning
+      <Alert // triggers strictmode warning
         isOpen={alert.toggle}
         children={alert.msg}
         color={alert.color}
         innerRef={alertRef}
-      /> */}
+      />
     </div>
   );
 };
@@ -144,10 +147,10 @@ const MyMapComponent = ({center, zoom}) => {
 
 // add status as parameters
 // if Render is fed as prop in Wrapper component
-const render = () => { 
-  const [currentLocation, setCurrentLocation] = React.useState();
-  const [status, setStatus] = React.useState(Status.LOADING)
-  React.useLayoutEffect(() => {
+const Render = () => { 
+  const [currentLocation, setCurrentLocation] = useState();
+  const [status, setStatus] = useState(Status.LOADING)
+  useLayoutEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (result) => { // 1st arg = permmission granted returns result.coords
         setCurrentLocation(
@@ -171,8 +174,6 @@ const render = () => {
   }, []);
 
   switch (status) {
-    case Status.LOADING:
-      return <h3><Spinner/>{status}...</h3>;
     case Status.FAILURE:
       return <h3>{status}...</h3>;
     case Status.SUCCESS:
@@ -180,6 +181,8 @@ const render = () => {
         zoom={11}
         center={currentLocation}
       />
+    default:
+      return <h3><Spinner/>{status}...</h3>;
   }
 };
 
@@ -187,7 +190,7 @@ export default function Map(){
   return (
     <Wrapper 
       apiKey={"AIzaSyAzFZcoRjWTTPDd4OqSG_yO8F4vhrMJcaM"}
-      render={render}
+      render={Render}
       libraries={["places"]}
     />
   );

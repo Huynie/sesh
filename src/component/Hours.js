@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   Col,
   Button,
@@ -10,7 +10,7 @@ import {
 } from 'reactstrap';
 
 const Hours = ({save}) => {
-  const days = ["sun", "mon", "tues", "wed", "thurs", "fri", "sat"];
+  const days = React.useState(["sun", "mon", "tues", "wed", "thurs", "fri", "sat"]);
   const [hours, setHours] = React.useState({});
   const [isFocused, setIsFocused] = React.useState();
 

@@ -3,13 +3,14 @@ import { Input } from 'reactstrap';
 
 const Search = ({map}) => {
   const searchRef = React.useRef();
-  React.useEffect(async()=>{
-    if(map) {
-      const autocomplete = await new google.maps.places.Autocomplete(document.getElementById("autocomplete"), {
-          componentRestrictions: {'country': 'us'},
-          types: ['(cities)'],
-          fields: ["address_components", "formatted_address", "geometry"]
-        })
+  React.useEffect(()=>{
+    const setAutocomplete = async() => {
+      const autocomplete = await new window.google.maps.places.Autocomplete(document.getElementById("autocomplete"), {
+        componentRestrictions: {'country': 'us'},
+        types: ['(cities)'],
+        fields: ["address_components", "formatted_address", "geometry"]
+      });
+
       const handlePlaceSelect = () => {
         const place = autocomplete.getPlace();
           const coordinates = {
@@ -19,6 +20,9 @@ const Search = ({map}) => {
         map.panTo(coordinates);
       };
       autocomplete.addListener('place_changed', handlePlaceSelect);
+    }
+    if(map) {
+      setAutocomplete();
     }
   }, [map]);
 
