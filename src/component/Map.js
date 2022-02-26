@@ -26,7 +26,7 @@ const MyMapComponent = ({center, zoom}) => {
   };
 
 
-  const addMarker = useCallback( async (spot) => {
+  const addMarker = async (spot) => {
     const handleMarkerClick = () => () => {
       if(!sidebarRef.current.id) {
         setSidebarData(spot);
@@ -66,7 +66,7 @@ const MyMapComponent = ({center, zoom}) => {
       console.log(error.message, spot.name);
     }
     //DO I NEED TO REMOVE CLICK HANDLER UPON UNMOUNT?
-  }, [map, sidebarRef, toggleAlert]);
+  };
 
   const addSpot = async (reqSpot, reqHours) => {
     try {
@@ -100,11 +100,58 @@ const MyMapComponent = ({center, zoom}) => {
   },[center, zoom]);
   
   useEffect(() => {
-    spots.forEach((spot) => {
-      if(geocoder) {
+    // const toggleAlert = (msg, color) => {
+    //   setAlert({toggle: true, msg, color});
+    //   setTimeout(()=>{
+    //     setAlert({...alert, toggle: false});
+    //   }, 3000);
+    // };
+    // const addMarker = async (spot) => {
+    //   const handleMarkerClick = () => () => {
+    //     if(!sidebarRef.current.id) {
+    //       setSidebarData(spot);
+    //       if(sidebarRef.current.style.right === '-50vw'){
+    //         document.querySelector('.sidebar__toggle').click();
+    //       }
+    //       sidebarRef.current.id = spot.spot_id;
+    //       return
+    //     }
+    //     if(sidebarRef.current.id === spot.spot_id) {
+    //       document.querySelector('.sidebar__toggle').click();
+    //       return
+    //     }
+    //     if(sidebarRef.current.id !== spot.spot_id) {
+    //       if(sidebarRef.current.style.right === '-50vw') {
+    //         document.querySelector('.sidebar__toggle').click();
+    //       }
+    //       setSidebarData(spot);
+    //       sidebarRef.current.id = spot.spot_id;
+    //       return
+    //     }
+    //   };
+    //   try {
+    //     await geocoder.geocode({ 'address': spot.address }, (results, status) => {
+    //       if (status === 'OK') {
+    //         const marker = new window.google.maps.Marker({
+    //           map,
+    //           position: results[0].geometry.location,
+    //           icon: "https://sesh-assets.s3.us-west-1.amazonaws.com/marker3.svg",
+    //           title: spot.name
+    //         });
+    //         marker.addListener("click", handleMarkerClick());
+    //       }
+    //     });
+    //   } catch (error) {
+    //     toggleAlert(`Geocode Error: ${spot.name} - ${error.code}`, 'danger');
+    //     console.log(error.message, spot.name);
+    //   }
+      //DO I NEED TO REMOVE CLICK HANDLER UPON UNMOUNT?
+    // };
+    if(spots) {
+      spots.forEach((spot) => {
         addMarker(spot);
-      }
-    });
+      });
+    }
   }, [spots, geocoder]);
 
   return (
