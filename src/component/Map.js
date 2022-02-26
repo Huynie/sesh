@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect, useRef, useCallback} from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { Button, Spinner, Alert } from 'reactstrap';
 import { spotsData, addSpotAndHours } from './api';
@@ -100,6 +100,7 @@ const MyMapComponent = ({center, zoom}) => {
   },[center, zoom]);
   
   useEffect(() => {
+    console.log('repeat')
     // const toggleAlert = (msg, color) => {
     //   setAlert({toggle: true, msg, color});
     //   setTimeout(()=>{
@@ -152,7 +153,7 @@ const MyMapComponent = ({center, zoom}) => {
         addMarker(spot);
       });
     }
-  }, [spots, geocoder]);
+  }, [spots]);
 
   return (
     <div className="map">
