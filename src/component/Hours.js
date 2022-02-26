@@ -21,7 +21,7 @@ const Hours = ({save}) => {
       newHours[day] = time;
     });
     save(newHours);
-  },[hours, days]);
+  });
 
   const toggleDay = (day) => {
     if(hours[day]) {
