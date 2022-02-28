@@ -26,6 +26,8 @@ const SideBar = React.forwardRef( ({data}, ref) => {
   const sidebarRight = toggle ? "0" : "-50vw";
   const iconRotate = toggle ? "180" : "0";
 
+  const { sidebarRef, sidebarToggleRef } = ref.current;
+  // console.log(ref.current);
   const sidebarClick = () => {
     if(!data) {
       setTooltipToggle(!tooltipToggle);
@@ -36,8 +38,9 @@ const SideBar = React.forwardRef( ({data}, ref) => {
   }
 
   return (
-    <div ref={ref} className="sidebar" style={{right: sidebarRight}}>
-      <Button 
+    <div ref={sidebarRef} className="sidebar" style={{right: sidebarRight}}>
+      <Button
+        innerRef={sidebarToggleRef} 
         onClick={() => sidebarClick()}
         className="sidebar__toggle"
         size="sm"
