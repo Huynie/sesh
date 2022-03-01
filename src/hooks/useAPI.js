@@ -2,7 +2,7 @@ import Axios from 'axios';
 import {useCallback} from 'react';
 
 const useAPI = () => {
-  const baseURL = 'http://sesh-env.eba-t2bymcma.us-west-1.elasticbeanstalk.com';
+  const baseURL = '/api';
   // const [data, setData] = useState();
   const getSpots = useCallback(async () => {
     try {
