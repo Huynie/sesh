@@ -25,26 +25,25 @@ const useGMAP = async ( center, zoom, mapRef, sidebarRef, sidebarToggleRef, setS
   
   const addMarker = useCallback( async(spot) => {
     const handleMarkerClick = () => {
-      // const sidebarToggle = document.getElementbyId('sidebarToggle');
-      // console.log(sidebarRef.current.style, sidebarRef.current.id);
+      const spot_id = spot.spot_id.toString();
       if(!sidebarRef.current.id) {
         setSidebarData(spot);
-        if(sidebarRef.current.style.right == '-50vw'){
+        if(sidebarRef.current.style.right === '-50vw'){
           sidebarToggleRef.current.click();
         }
-        sidebarRef.current.id = spot.spot_id;
+        sidebarRef.current.id = spot_id;
         return
       }
-      if(sidebarRef.current.id == spot.spot_id) {
+      if(sidebarRef.current.id === spot_id) {
         sidebarToggleRef.current.click();
         return
       }
-      if(sidebarRef.current.id != spot.spot_id) {
-        if(sidebarRef.current.style.right == '-50vw') {
+      if(sidebarRef.current.id !== spot_id) {
+        if(sidebarRef.current.style.right === '-50vw') {
           sidebarToggleRef.current.click();
         }
         setSidebarData(spot);
-        sidebarRef.current.id = spot.spot_id;
+        sidebarRef.current.id = spot_id;
         return
       }
     };
