@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect, useRef, createRef } from 'react';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { Button, Spinner, Alert } from 'reactstrap';
 import SideBar from './SideBar';
@@ -13,7 +13,8 @@ const MyMapComponent = ({center, zoom}) => {
   const sidebarRef = useRef();
   const sidebarToggleRef = useRef();
   const sidebarRefs = useRef({sidebarRef, sidebarToggleRef});
-  const googleMap = useGMAP(center, zoom, mapRef, sidebarRef, sidebarToggleRef);
+  const [sidebarData, setSidebarData] = useState(null);
+  const {map, setSpots, addMarker} = useGMAP(center, zoom, mapRef, sidebarRef, sidebarToggleRef, setSidebarData);
   const api = useAPI();
   const alertRef = useRef();
   const [addSpotModalToggle, setAddSpotModalToggle] = useState(false);
@@ -29,8 +30,8 @@ const MyMapComponent = ({center, zoom}) => {
   const addSpot = async (reqSpot, reqHours) => {
     try {
       const data = await api.addSpotAndHours(reqSpot, reqHours);
-      // await googleMap.addMarker(data);
-      googleMap.setSpots(prev => [...prev, data]);
+      await addMarker(data);
+      setSpots(prev => [...prev, data]);
       setAddSpotModalToggle(!addSpotModalToggle);
       toggleAlert('Spot successfully added!', 'success');
     } catch (error) {
@@ -43,9 +44,9 @@ const MyMapComponent = ({center, zoom}) => {
       <div className="map__container">
         <div ref={mapRef} id="map"></div>
       </div>
-      <Search map={googleMap.map}/>
+      <Search map={map}/>
       <SideBar 
-        data={googleMap.sidebarData}
+        data={sidebarData}
         ref={sidebarRefs}
       />
       <div className="map__buttons">
@@ -124,7 +125,7 @@ export default function Map2(){
       render={Render}
       libraries={["places"]}
       id="google-map-script"
-      callback={(status, loader) => console.log(status, loader)}
+      // callback={(status, loader) => console.log(status, loader)}
     />
   );
 }

@@ -1,9 +1,10 @@
 import Axios from 'axios';
+import {useCallback} from 'react';
 
 const useAPI = () => {
   const baseURL = 'http://sesh-env.eba-t2bymcma.us-west-1.elasticbeanstalk.com';
-
-  const getSpots = async () => {
+  // const [data, setData] = useState();
+  const getSpots = useCallback(async () => {
     try {
       const spots = await Axios({
         method: 'get',
@@ -14,8 +15,9 @@ const useAPI = () => {
     } catch (error) {
       console.log(error.message)
     }
-  }
-  const getHours = async () => {
+  }, [baseURL]);
+
+  const getHours = useCallback(async () => {
     try {
       const hours = await Axios({
         method: 'get',
@@ -26,7 +28,7 @@ const useAPI = () => {
     } catch (error) {
       console.log(error.message)
     }
-  }
+  }, [baseURL]);
 
   const addSpotAndHours = async (reqSpot, reqHours) => {
     try {
@@ -52,7 +54,7 @@ const useAPI = () => {
     }
   }
 
-  const spotsData = async () => {
+  const spotsData = useCallback(async () => {
     let combinedData = [];
     const spots = await getSpots();
     const hours = await getHours();
@@ -64,13 +66,18 @@ const useAPI = () => {
       });
     })
     return combinedData
-  }
+  }, [getSpots, getHours]);
+
+  // useEffect(() => {
+  //   const runFirst = 
+  // })
 
   return {
     getSpots,
     getHours,
     addSpotAndHours,
-    spotsData
+    spotsData,
+    // data
   }
 }
 

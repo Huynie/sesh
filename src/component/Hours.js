@@ -79,14 +79,16 @@ const Hours = ({save}) => {
           days.map((day, idx) => {
             return(
               <Button
-                key={day}
+                key={idx}
                 id={day}
                 onClick={(e) => toggleDay(day)}
                 color="primary"
                 outline
                 active={hours[day] ? true : false}
-                children={day}
-              />
+                // children={day} 
+              >
+                {day}
+              </Button>
             )
           })
         }
