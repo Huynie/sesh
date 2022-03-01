@@ -2,7 +2,7 @@ import Axios from 'axios';
 import {useCallback} from 'react';
 
 const useAPI = () => {
-  // const baseURL = '/api';
+  // const  = '/api';
   // const [data, setData] = useState();
   const getSpots = useCallback(async () => {
     try {
@@ -15,7 +15,7 @@ const useAPI = () => {
     } catch (error) {
       console.log(error.message)
     }
-  }, [baseURL]);
+  }, []);
 
   const getHours = useCallback(async () => {
     try {
@@ -28,7 +28,7 @@ const useAPI = () => {
     } catch (error) {
       console.log(error.message)
     }
-  }, [baseURL]);
+  }, []);
 
   const addSpotAndHours = async (reqSpot, reqHours) => {
     try {
