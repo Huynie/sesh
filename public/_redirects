@@ -1,3 +1,5 @@
 /* /index.html 200
 
-/api/* http://sesh-env.eba-t2bymcma.us-west-1.elasticbeanstalk.com:splat 200
+/spots http://sesh-env.eba-t2bymcma.us-west-1.elasticbeanstalk.com/spots:splat 200!
+
+/spotH http://sesh-env.eba-t2bymcma.us-west-1.elasticbeanstalk.com/spothours:splat 200!

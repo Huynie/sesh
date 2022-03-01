@@ -2,13 +2,13 @@ import Axios from 'axios';
 import {useCallback} from 'react';
 
 const useAPI = () => {
-  const baseURL = '/api';
+  // const baseURL = '/api';
   // const [data, setData] = useState();
   const getSpots = useCallback(async () => {
     try {
       const spots = await Axios({
         method: 'get',
-        url: `${baseURL}/spots`
+        url: `/spots`
       });
       const data = await spots.data;
       return data;
@@ -21,7 +21,7 @@ const useAPI = () => {
     try {
       const hours = await Axios({
         method: 'get',
-        url: `${baseURL}/spothours`
+        url: `/spothours`
       });
       const data = await hours.data;
       return data
@@ -34,7 +34,7 @@ const useAPI = () => {
     try {
       const spot = await Axios({
         method: 'post',
-        url: `${baseURL}/spots`,
+        url: `/spots`,
         data: reqSpot,
       });
 
@@ -43,7 +43,7 @@ const useAPI = () => {
 
       const hoursRes = await Axios({
         method: 'post',
-        url: `${baseURL}/spothours`,
+        url: `/spothours`,
         data: newReqHours,
       });
       const hoursData = await hoursRes.data;
