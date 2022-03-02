@@ -1,5 +1,3 @@
-/* /index.html 200
+/api/spots/* http://sesh-env.eba-t2bymcma.us-west-1.elasticbeanstalk.com/spots/:splat 200!
 
-/spots http://sesh-env.eba-t2bymcma.us-west-1.elasticbeanstalk.com/spots:splat 200!
-
-/spothours http://sesh-env.eba-t2bymcma.us-west-1.elasticbeanstalk.com/spothours:splat 200!
+/api/spothours/* http://sesh-env.eba-t2bymcma.us-west-1.elasticbeanstalk.com/spothours/:splat 200!

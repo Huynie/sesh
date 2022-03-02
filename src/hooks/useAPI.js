@@ -8,7 +8,7 @@ const useAPI = () => {
     try {
       const spots = await Axios({
         method: 'get',
-        url: `/spots`
+        url: `/api/spots/`
       });
       const data = await spots.data;
       return data;
@@ -21,7 +21,7 @@ const useAPI = () => {
     try {
       const hours = await Axios({
         method: 'get',
-        url: `/spothours`
+        url: `/api/spothours/`
       });
       const data = await hours.data;
       return data
@@ -34,7 +34,7 @@ const useAPI = () => {
     try {
       const spot = await Axios({
         method: 'post',
-        url: `/spots`,
+        url: `/api/spots/`,
         data: reqSpot,
       });
 
@@ -43,7 +43,7 @@ const useAPI = () => {
 
       const hoursRes = await Axios({
         method: 'post',
-        url: `/spothours`,
+        url: `/api/spothours/`,
         data: newReqHours,
       });
       const hoursData = await hoursRes.data;
