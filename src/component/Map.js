@@ -121,7 +121,7 @@ const Render = () => {
 export default function Map2(){
   return (
     <Wrapper 
-      apiKey={"AIzaSyAzFZcoRjWTTPDd4OqSG_yO8F4vhrMJcaM"}
+      apiKey={process.env.REACT_APP_API_KEY}
       render={Render}
       libraries={["places"]}
       id="google-map-script"

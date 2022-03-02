@@ -8,7 +8,7 @@ const Test = () => {
       try {
         const response = await Axios({
           method: 'get',
-          url: `/spots`
+          url: `https://seshn.netlify.app/spots`
         });
         const data = await response.data;
         console.log(data);

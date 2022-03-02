@@ -2,8 +2,6 @@ import Axios from 'axios';
 import {useCallback} from 'react';
 
 const useAPI = () => {
-  // const  = '/api';
-  // const [data, setData] = useState();
   const getSpots = useCallback(async () => {
     try {
       const spots = await Axios({
@@ -68,16 +66,11 @@ const useAPI = () => {
     return combinedData
   }, [getSpots, getHours]);
 
-  // useEffect(() => {
-  //   const runFirst = 
-  // })
-
   return {
     getSpots,
     getHours,
     addSpotAndHours,
-    spotsData,
-    // data
+    spotsData
   }
 }
 

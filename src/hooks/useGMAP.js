@@ -13,7 +13,7 @@ const useGMAP = async ( center, zoom, mapRef, sidebarRef, sidebarToggleRef, setS
       {
         center,
         zoom,
-        mapId: 'b2e6fec7d55d0a59',
+        mapId: process.env.REACT_APP_MAP_ID,
         disableDefaultUI: true
       }
     );
