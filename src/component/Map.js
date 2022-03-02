@@ -118,7 +118,7 @@ const Render = () => {
   }
 };
 
-export default function Map2(){
+export default function Map(){
   return (
     <Wrapper 
       apiKey={process.env.REACT_APP_API_KEY}

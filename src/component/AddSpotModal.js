@@ -79,7 +79,7 @@ const AddSpotModal = ({isOpen, toggle, submit}) => {
             />
           </FormGroup>
           <FormGroup>
-            <Hours save={(obj) => setHours(obj)}/>
+            <Hours save={setHours}/>
           </FormGroup>
           <FormGroup>
             <InputGroup>

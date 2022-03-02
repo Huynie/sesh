@@ -186,7 +186,7 @@ const Render = () => {
   }
 };
 
-export default function Map(){
+export default function Map3(){
   return (
     <Wrapper 
       apiKey={"AIzaSyAzFZcoRjWTTPDd4OqSG_yO8F4vhrMJcaM"}
