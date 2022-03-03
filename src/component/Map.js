@@ -14,7 +14,7 @@ const MyMapComponent = ({center, zoom}) => {
   const sidebarToggleRef = useRef();
   const sidebarRefs = useRef({sidebarRef, sidebarToggleRef});
   const [sidebarData, setSidebarData] = useState(null);
-  const {map, setSpots, addMarker} = useGMAP(center, zoom, mapRef, sidebarRef, sidebarToggleRef, setSidebarData);
+  const {setSpots, addMarker, getAutocomplete} = useGMAP(center, zoom, mapRef, sidebarRef, sidebarToggleRef, setSidebarData);
   const api = useAPI();
   const alertRef = useRef();
   const [addSpotModalToggle, setAddSpotModalToggle] = useState(false);
@@ -44,7 +44,10 @@ const MyMapComponent = ({center, zoom}) => {
       <div className="map__container">
         <div ref={mapRef} id="map"></div>
       </div>
-      <Search map={map}/>
+      <Search
+        setAutocomplete={ async (searchRef, handlePlaceSelect) => await getAutocomplete('(cities)', searchRef, handlePlaceSelect)}
+        locationType='(cities)'
+      />
       <SideBar 
         data={sidebarData}
         ref={sidebarRefs}
@@ -62,6 +65,7 @@ const MyMapComponent = ({center, zoom}) => {
       <AddSpotModal 
         isOpen={addSpotModalToggle}
         toggle={() => setAddSpotModalToggle(!addSpotModalToggle)}
+        setAutocomplete={(addressRef) => getAutocomplete('address',addressRef)}
         submit={(spot, hours) => {
           addSpot(spot, hours);
         }}

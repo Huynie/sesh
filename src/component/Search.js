@@ -1,31 +1,22 @@
 import * as React from 'react';
 import { Input } from 'reactstrap';
 
-const Search = ({map}) => {
+const Search = ({setAutocomplete}) => {
   const searchRef = React.useRef();
+  const handlePlaceSelect = React.useCallback((map, autocomplete) => () => {
+    const place = autocomplete.getPlace();
+    const coordinates = {
+      lat: place.geometry.location.lat(),
+      lng: place.geometry.location.lng()
+    }
+    map.panTo(coordinates);
+  }, []);
+
   React.useEffect(()=>{
-    const setAutocomplete = async() => {
-      const autocomplete = await new window.google.maps.places.Autocomplete(document.getElementById("autocomplete"), {
-        componentRestrictions: {'country': 'us'},
-        types: ['(cities)'],
-        fields: ["address_components", "formatted_address", "geometry"]
-      });
-
-      const handlePlaceSelect = () => {
-        const place = autocomplete.getPlace();
-          const coordinates = {
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng()
-          }
-        map.panTo(coordinates);
-      };
-      autocomplete.addListener('place_changed', handlePlaceSelect);
+    if(setAutocomplete) {
+      setAutocomplete(searchRef, handlePlaceSelect);
     }
-    if(map) {
-      setAutocomplete();
-    }
-  }, [map]);
-
+  }, [setAutocomplete, searchRef, handlePlaceSelect]);
 
   return (
     <div className="map__search">

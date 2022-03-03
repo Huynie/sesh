@@ -10,7 +10,7 @@ import {
 } from 'reactstrap';
 
 const Hours = ({save}) => {
-  const days = ["sun", "mon", "tues", "wed", "thurs", "fri", "sat"];
+  const days = React.useMemo(()=>["sun", "mon", "tues", "wed", "thurs", "fri", "sat"],[]);
   const [hours, setHours] = React.useState({});
   const [isFocused, setIsFocused] = React.useState();
 
@@ -21,7 +21,7 @@ const Hours = ({save}) => {
       newHours[day] = time;
     });
     save(newHours);
-  },[days, save]);
+  },[days, hours, save]);
 
   const toggleDay = (day) => {
     if(hours[day]) {
@@ -71,7 +71,6 @@ const Hours = ({save}) => {
     )
   } 
 
-  console.log(days)
   return (
     <FormGroup>
       <Label>Days</Label>
@@ -86,10 +85,8 @@ const Hours = ({save}) => {
                 color="primary"
                 outline
                 active={hours[day] ? true : false}
-                // children={day} 
-              >
-                {day}
-              </Button>
+                children={day} 
+              />
             )
           })
         }

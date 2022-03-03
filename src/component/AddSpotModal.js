@@ -14,7 +14,7 @@ import {
 } from 'reactstrap';
 import Hours from './Hours';
 
-const AddSpotModal = ({isOpen, toggle, submit}) => {
+const AddSpotModal = ({isOpen, toggle, submit, setAutocomplete}) => {
   const [spot, setSpot] = React.useState({
     name: "",
     address: "",
@@ -24,6 +24,12 @@ const AddSpotModal = ({isOpen, toggle, submit}) => {
     waiver: false
   })
   const [hours, setHours] = React.useState({});
+  const addressRef = React.useRef();
+  React.useEffect(()=>{
+    if(setAutocomplete) {
+      setAutocomplete(addressRef);
+    }
+  }, [setAutocomplete, addressRef]);
 
   return (
     <Modal isOpen={isOpen} centered>
@@ -46,6 +52,7 @@ const AddSpotModal = ({isOpen, toggle, submit}) => {
           <FormGroup>
             <Label>Address</Label>
             <Input
+              innerRef={addressRef}
               id="address"
               aria-label="address"
               type="text"
