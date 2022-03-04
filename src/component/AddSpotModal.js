@@ -1,20 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import {
-  Col,
   Button,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  InputGroup,
 } from 'reactstrap';
-import Hours from './Hours';
+import AddSpotForm from './AddSpotForm';
 
 const AddSpotModal = ({isOpen, toggle, submit, setAutocomplete}) => {
+  const [hours, setHours] = React.useState({});
   const [spot, setSpot] = React.useState({
     name: "",
     address: "",
@@ -23,101 +18,19 @@ const AddSpotModal = ({isOpen, toggle, submit, setAutocomplete}) => {
     price: "",
     waiver: false
   })
-  const [hours, setHours] = React.useState({});
-  const addressRef = React.useRef();
-  React.useEffect(()=>{
-    if(setAutocomplete) {
-      setAutocomplete(addressRef);
-    }
-  }, [setAutocomplete, addressRef]);
 
   return (
-    <Modal isOpen={isOpen} centered>
-      <ModalHeader toggle={() => toggle()}>
+    <Modal isOpen={isOpen} zIndex={900} centered>
+      <ModalHeader toggle={() => toggle(!isOpen)}>
         Add Spot
       </ModalHeader>
       <ModalBody>
-        <Form>
-          <FormGroup>
-            <Label>Name</Label>
-            <Input
-              id="name"
-              aria-label="name"
-              type="text"
-              placeholder="What is this spot called?"
-              onChange={e => setSpot({...spot, name: e.target.value})}
-              value={spot.name}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label>Address</Label>
-            <Input
-              innerRef={addressRef}
-              id="address"
-              aria-label="address"
-              type="text"
-              placeholder="Where is this spot at?"
-              onChange={e => setSpot({...spot, address: e.target.value})}
-              value={spot.address}
-              required
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label>Phone Number</Label>
-            <Input
-              id="phone"
-              aria-label="phone number input"
-              type="phone"
-              placeholder="Enter An phone number"
-              onChange={e => setSpot({...spot, phone: e.target.value})}
-              value={spot.phone}
-              maxLength={80}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label>Host</Label>
-            <Input
-              id="host"
-              aria-label="host"
-              type="text"
-              placeholder="Who is the host of this spot"
-              onChange={e => setSpot({...spot, host: e.target.value})}
-              value={spot.host}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Hours save={setHours}/>
-          </FormGroup>
-          <FormGroup>
-            <InputGroup>
-              <Col className="px-2">
-                <Label for="price">Price</Label>
-                <Input
-                  id="price"
-                  aria-label="price"
-                  type="text"
-                  placeholder="How much does practice cost?"
-                  onChange={e => setSpot({...spot, price: e.target.value})}
-                  value={spot.price}
-                />
-              </Col>
-              <Col className="px-2">
-                <Label for="waiver">Waiver</Label>
-                <Input
-                  id="waiver"
-                  aria-label="waiver"
-                  type="select"
-                  placeholder="How much does practice cost?"
-                  onChange={e => setSpot({...spot, waiver: e.target.value})}
-                  value={spot.waiver}
-                >
-                  <option value={false}>not required</option>
-                  <option value={true}>required</option>
-                </Input>
-              </Col>
-            </InputGroup>
-          </FormGroup>
-        </Form>
+       <AddSpotForm
+        spot={spot}
+        setSpot={setSpot}
+        setHours={setHours}
+        setAutocomplete={setAutocomplete}
+       />
       </ModalBody>
       <ModalFooter>
         <Button 

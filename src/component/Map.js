@@ -1,12 +1,19 @@
 import React, { useState, useLayoutEffect, useRef } from 'react';
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
-import { Button, Spinner, Alert } from 'reactstrap';
+import {
+  Button,
+  Spinner,
+  Alert,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from 'reactstrap';
 import SideBar from './SideBar';
 import Search from './Search';
 import AddSpotModal from './AddSpotModal';
 import useGMAP from '../hooks/useGMAP';
 import useAPI from '../hooks/useAPI';
-// import 'dotenv';
 
 const MyMapComponent = ({center, zoom}) => {
   const mapRef = useRef();
@@ -29,12 +36,14 @@ const MyMapComponent = ({center, zoom}) => {
 
   const addSpot = async (reqSpot, reqHours) => {
     try {
-      const data = await api.addSpotAndHours(reqSpot, reqHours);
-      await addMarker(data);
-      setSpots(prev => [...prev, data]);
-      setAddSpotModalToggle(!addSpotModalToggle);
-      toggleAlert('Spot successfully added!', 'success');
+      // const data = await api.addSpotAndHours(reqSpot, reqHours);
+      // await addMarker(data);
+      // setSpots(prev => [...prev, data]);
+      // setAddSpotModalToggle(!addSpotModalToggle);
+      // toggleAlert('Spot successfully added!', 'success');
+      console.log(reqSpot, reqHours)
     } catch (error) {
+      toggleAlert(error.message, 'danger');
       console.log(error.message);
     }
   };
@@ -44,10 +53,7 @@ const MyMapComponent = ({center, zoom}) => {
       <div className="map__container">
         <div ref={mapRef} id="map"></div>
       </div>
-      <Search
-        setAutocomplete={ async (searchRef, handlePlaceSelect) => await getAutocomplete('(cities)', searchRef, handlePlaceSelect)}
-        locationType='(cities)'
-      />
+      <Search setAutocomplete={getAutocomplete}/>
       <SideBar 
         data={sidebarData}
         ref={sidebarRefs}
@@ -64,11 +70,9 @@ const MyMapComponent = ({center, zoom}) => {
       </div>
       <AddSpotModal 
         isOpen={addSpotModalToggle}
-        toggle={() => setAddSpotModalToggle(!addSpotModalToggle)}
-        setAutocomplete={(addressRef) => getAutocomplete('address',addressRef)}
-        submit={(spot, hours) => {
-          addSpot(spot, hours);
-        }}
+        toggle={setAddSpotModalToggle}
+        setAutocomplete={getAutocomplete}
+        submit={addSpot}
       />
       <Alert // triggers strictmode warning
         isOpen={alert.toggle}

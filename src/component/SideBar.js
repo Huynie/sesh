@@ -25,9 +25,7 @@ const SideBar = React.forwardRef( ({data}, ref) => {
   const [accordionId, setAccordionId] = React.useState();
   const sidebarRight = toggle ? "0" : "-50vw";
   const iconRotate = toggle ? "180" : "0";
-
   const { sidebarRef, sidebarToggleRef } = ref.current;
-  // console.log(ref.current);
   const sidebarClick = () => {
     if(!data) {
       setTooltipToggle(!tooltipToggle);

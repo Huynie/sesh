@@ -6,7 +6,6 @@ const useGMAP = ( center, zoom, mapRef, sidebarRef, sidebarToggleRef, setSidebar
   const [geocoder, setGeocoder] = useState(null);
   const [spots, setSpots] = useState(null);
   const {spotsData} = useAPI();
-  // const [autocomplete, setAutocomplete] = useState(null);
   
   const getMap = useCallback(async () => {
     const newMap = await new window.google.maps.Map(
@@ -23,16 +22,18 @@ const useGMAP = ( center, zoom, mapRef, sidebarRef, sidebarToggleRef, setSidebar
 
   const getGeocoder = async() => setGeocoder(await new window.google.maps.Geocoder());
 
-  const getAutocomplete = useCallback(async(locationType, searchRef, handlePlaceSelect) => {
-    if(map){
-      const newAutocomplete = await new window.google.maps.places.Autocomplete(searchRef.current, {
+  const getAutocomplete = useCallback( async(locationType, ref, handlePlaceSelect) => {
+    if(map && ref.current){
+      const newAutocomplete = await new window.google.maps.places.Autocomplete(ref.current, {
         componentRestrictions: {'country': 'us'},
         types: [locationType],
         fields: ["address_components", "formatted_address", "geometry"]
       });
-      newAutocomplete.addListener('place_changed', handlePlaceSelect(map, newAutocomplete));
+      if(handlePlaceSelect){
+        newAutocomplete.addListener('place_changed', handlePlaceSelect(map, newAutocomplete));
+      }
     }
-  }, [map])
+  },[map]);
   
   const addMarker = useCallback( async(spot) => {
     const handleMarkerClick = () => {
