@@ -11,13 +11,13 @@ import AddSpotModal from './AddSpotModal';
 import useGMAP from '../hooks/useGMAP';
 import useAPI from '../hooks/useAPI';
 
-const MyMapComponent = ({center, zoom}) => {
+const MapComponent = ({center, zoom}) => {
   const mapRef = useRef();
   const sidebarRef = useRef();
   const sidebarToggleRef = useRef();
   const sidebarRefs = useRef({sidebarRef, sidebarToggleRef});
   const [sidebarData, setSidebarData] = useState(null);
-  const {setSpots, addMarker, getAutocomplete} = useGMAP(center, zoom, mapRef, sidebarRef, sidebarToggleRef, setSidebarData);
+  const {setSpots, getAutocomplete} = useGMAP(center, zoom, mapRef, sidebarRef, sidebarToggleRef, setSidebarData);
   const api = useAPI();
   const alertRef = useRef();
   const [addSpotModalToggle, setAddSpotModalToggle] = useState(false);
@@ -33,11 +33,9 @@ const MyMapComponent = ({center, zoom}) => {
   const addSpot = async (reqSpot, reqHours) => {
     try {
       const data = await api.addSpotAndHours(reqSpot, reqHours);
-      await addMarker(data);
       setSpots(prev => [...prev, data]);
       setAddSpotModalToggle(!addSpotModalToggle);
-      toggleAlert('Spot successfully added!', 'success');
-      console.log(reqSpot, reqHours)
+      toggleAlert('Spot successfully added!', 'success', 'success');
     } catch (error) {
       toggleAlert(error.message, 'danger');
       console.log(error.message);
@@ -80,7 +78,6 @@ const MyMapComponent = ({center, zoom}) => {
   );
 };
 
-
 // add status as parameters
 // if Render is fed as prop in Wrapper component
 const Render = () => { 
@@ -113,7 +110,7 @@ const Render = () => {
     case Status.FAILURE:
       return <h3>{status}...</h3>;
     case Status.SUCCESS:
-      return <MyMapComponent
+      return <MapComponent
         zoom={11}
         center={currentLocation}
       />
