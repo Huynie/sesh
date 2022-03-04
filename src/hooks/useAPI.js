@@ -28,7 +28,7 @@ const useAPI = () => {
     }
   }, []);
 
-  const addSpotAndHours = async (reqSpot, reqHours) => {
+  const addSpotAndHours = useCallback( async (reqSpot, reqHours) => {
     try {
       const spot = await Axios({
         method: 'post',
@@ -50,7 +50,7 @@ const useAPI = () => {
     } catch (error) {
       console.log(error.message)
     }
-  }
+  },[])
 
   const spotsData = useCallback(async () => {
     let combinedData = [];
