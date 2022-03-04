@@ -22,7 +22,7 @@ const useGMAP = ( center, zoom, mapRef, sidebarRef, sidebarToggleRef, setSidebar
 
   const getGeocoder = async() => setGeocoder(await new window.google.maps.Geocoder());
 
-  const getAutocomplete = useCallback( async(locationType, ref, handlePlaceSelect) => {
+  const setAutocomplete = useCallback( async(locationType, ref, handlePlaceSelect) => {
     if(map && ref.current){
       const newAutocomplete = await new window.google.maps.places.Autocomplete(ref.current, {
         componentRestrictions: {'country': 'us'},
@@ -111,7 +111,7 @@ const useGMAP = ( center, zoom, mapRef, sidebarRef, sidebarToggleRef, setSidebar
     getGeocoder,
     addMarker,
     setSpots,
-    getAutocomplete
+    setAutocomplete
   }
 }
 

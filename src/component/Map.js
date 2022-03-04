@@ -17,7 +17,7 @@ const MapComponent = ({center, zoom}) => {
   const sidebarToggleRef = useRef();
   const sidebarRefs = useRef({sidebarRef, sidebarToggleRef});
   const [sidebarData, setSidebarData] = useState(null);
-  const {setSpots, getAutocomplete} = useGMAP(center, zoom, mapRef, sidebarRef, sidebarToggleRef, setSidebarData);
+  const {setSpots, setAutocomplete} = useGMAP(center, zoom, mapRef, sidebarRef, sidebarToggleRef, setSidebarData);
   const api = useAPI();
   const alertRef = useRef();
   const [addSpotModalToggle, setAddSpotModalToggle] = useState(false);
@@ -47,7 +47,7 @@ const MapComponent = ({center, zoom}) => {
       <div className="map__container">
         <div ref={mapRef} id="map"></div>
       </div>
-      <Search setAutocomplete={getAutocomplete}/>
+      <Search setAutocomplete={setAutocomplete}/>
       <SideBar 
         data={sidebarData}
         ref={sidebarRefs}
@@ -65,7 +65,7 @@ const MapComponent = ({center, zoom}) => {
       <AddSpotModal 
         isOpen={addSpotModalToggle}
         toggle={setAddSpotModalToggle}
-        setAutocomplete={getAutocomplete}
+        setAutocomplete={setAutocomplete}
         submit={addSpot}
       />
       <Alert // triggers strictmode warning
