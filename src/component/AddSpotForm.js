@@ -19,7 +19,7 @@ const AddSpotForm = ({spot, setSpot, setHours, setAutocomplete}) => {
       };
       setAutocomplete('address', addressRef, handlePlaceSelect);
     }
-  }, [addressRef, setAutocomplete]);
+  }, [addressRef, setAutocomplete, spot, setSpot]);
 
   return (
     <Form>

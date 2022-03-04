@@ -3,11 +3,7 @@ import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import {
   Button,
   Spinner,
-  Alert,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter
+  Alert
 } from 'reactstrap';
 import SideBar from './SideBar';
 import Search from './Search';
@@ -36,11 +32,11 @@ const MyMapComponent = ({center, zoom}) => {
 
   const addSpot = async (reqSpot, reqHours) => {
     try {
-      // const data = await api.addSpotAndHours(reqSpot, reqHours);
-      // await addMarker(data);
-      // setSpots(prev => [...prev, data]);
-      // setAddSpotModalToggle(!addSpotModalToggle);
-      // toggleAlert('Spot successfully added!', 'success');
+      const data = await api.addSpotAndHours(reqSpot, reqHours);
+      await addMarker(data);
+      setSpots(prev => [...prev, data]);
+      setAddSpotModalToggle(!addSpotModalToggle);
+      toggleAlert('Spot successfully added!', 'success');
       console.log(reqSpot, reqHours)
     } catch (error) {
       toggleAlert(error.message, 'danger');
