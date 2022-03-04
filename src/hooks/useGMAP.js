@@ -79,20 +79,19 @@ const useGMAP = ( center, zoom, mapRef, sidebarRef, sidebarToggleRef, setSidebar
   }, [geocoder, map, sidebarRef, sidebarToggleRef, setSidebarData]);
 
   useEffect(() => {
-    const doAll = async() => {
+    const loadFirst = async() => {
       await getMap();
       await getGeocoder();
       setSpots(await spotsData());
     }
     
     if(window.google) {
-      doAll();
+      loadFirst();
     } else {
       const googleScript = document.getElementById('google-map-script');
       
-      googleScript.addEventListener('load', () => doAll());
+      googleScript.addEventListener('load', () => loadFirst());
     }
-    // doAll();
   }, [getMap, spotsData]);
 
   useEffect(()=>{
