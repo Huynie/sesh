@@ -21,14 +21,14 @@ nav {
 }
 
 #map {
-  height: 110vh;
+  height: 110%;
 }
 
 .map {
   position: relative;
   display: flex;
   align-items: stretch;
-  height: 93vh;
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -52,31 +52,25 @@ nav {
   padding: 1rem;
 }
 
-.map__buttons {
-  /* width: 100%; */
+.map__button--add {
+  z-index: 10;
+  height: 2rem;
+  width: 2rem;
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
   position: absolute;
+  left: 2rem;
   bottom: 0;
   padding: 1rem;
+  background-color: #ff9839 !important;
+  color: white;
 }
 
-.map__addFav {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.map__addFav--add,
-.map__addFav--fav {
-  z-index: 10;
-}
-
-.map__chat {
+/* .map__chat {
   justify-self: flex-end;
   z-index: 10;
-}
+} */
 
 .sidebar {
   position: absolute;
@@ -100,6 +94,8 @@ nav {
   top: 95%;
   left: -3rem;
   z-index: 10;
+  height: 2rem;
+  width: 2rem;
 }
 
 .sidebar__content {
@@ -123,13 +119,14 @@ nav {
 }
 
 @media only screen and (max-width: 600px) {
-  #map {
-    height: 100%;
-  }
+  /* #map {
+    height: 110%;
+  } */
 
   .map {
     display: block;
     overflow: hidden;
+    height: 93vh;
   }
   .map__container {
     position: relative;
@@ -143,17 +140,16 @@ nav {
     top: 0;
   }
 
-  .map__buttons {
-    bottom: 80vh;
+  .map__button--add {
     position: relative;
-    bottom: 12vh;
+    bottom: 10vh;
   }
 
   .sidebar {
     /* position: relative; */
     right: 0vw;
     left: 0vw;
-    top: 95vh;
+    top: 93vh;
     max-width: max-content;
     width: max-content;
     height: 55vh;
@@ -161,7 +157,7 @@ nav {
   }
 
   .sidebar--show {
-    top: 44vh;
+    top: 44.5vh;
   }
 
   .sidebar__toggle {

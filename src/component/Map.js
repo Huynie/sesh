@@ -52,16 +52,15 @@ const MapComponent = ({center, zoom}) => {
         data={sidebarData}
         ref={sidebarRefs}
       />
-      <div className="map__buttons">
-        <div className="map__addFav">
-          <Button 
-            className="map__addFav--add" 
-            color="primary" 
-            size="sm"
-            onClick={() => setAddSpotModalToggle(!addSpotModalToggle)}
-          >+</Button>
-        </div>
-      </div>
+      <Button 
+        className="map__button--add" 
+        size="sm"
+        onClick={() => setAddSpotModalToggle(!addSpotModalToggle)}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="white" viewBox="0 0 24 24" stroke="white" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+      </Button>
       <AddSpotModal 
         isOpen={addSpotModalToggle}
         toggle={setAddSpotModalToggle}

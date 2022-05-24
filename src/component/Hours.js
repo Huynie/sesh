@@ -86,6 +86,7 @@ const Hours = ({save}) => {
                 outline
                 active={hours[day] ? true : false}
                 children={day} 
+                className="px-0"
               />
             )
           })
