@@ -37,10 +37,11 @@ const useGMAP = ( center, zoom, mapRef, sidebarRef, sidebarToggleRef, setSidebar
   
   const addMarker = useCallback( async(spot) => {
     const handleMarkerClick = () => {
+      const show = sidebarRef.current.classList.contains('sidebar--show');
       const spot_id = spot.spot_id.toString();
       if(!sidebarRef.current.id) {
         setSidebarData(spot);
-        if(sidebarRef.current.style.right === '-50vw'){
+        if(!show){
           sidebarToggleRef.current.click();
         }
         sidebarRef.current.id = spot_id;
@@ -51,7 +52,7 @@ const useGMAP = ( center, zoom, mapRef, sidebarRef, sidebarToggleRef, setSidebar
         return
       }
       if(sidebarRef.current.id !== spot_id) {
-        if(sidebarRef.current.style.right === '-50vw') {
+        if(!show) {
           sidebarToggleRef.current.click();
         }
         setSidebarData(spot);

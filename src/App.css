@@ -1,11 +1,11 @@
 .App h1::before {
-	content: "# ";
-	color: #2979ff;
+  content: "# ";
+  color: #2979ff;
 }
 
 Footer {
-	height: 20vh;
-	background-color: gray;
+  height: 20vh;
+  background-color: gray;
 }
 /* 
 nav {
@@ -14,101 +14,165 @@ nav {
 } */
 
 .home {
-	width: auto;
+  width: auto;
 }
 .home__section {
-	height: 100vh;
+  height: 100vh;
 }
 
 #map {
-	height: 95vh;
+  height: 110vh;
 }
 
 .map {
-	position: relative;
-	display: flex;
-	align-items: stretch;
-	height: 95vh;
-	overflow-x: hidden;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  height: 93vh;
+  overflow: hidden;
 }
 
 .map__container {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.2s ease-in-out;
 }
 
+/* .map__container--toggle {
+	height: 100vh;
+} */
+
 .map__search {
-	align-self: flex-start;
-	z-index: 10;
-	width: 100%;
-	padding: 1rem;
+  align-self: flex-start;
+  z-index: 10;
+  width: 100%;
+  padding: 1rem;
 }
 
 .map__buttons {
-	/* width: 100%; */
-	display: flex;
-	align-items: flex-end;
-	justify-content: space-between;
-	position: absolute;
-	bottom: 0;
-	padding: 1rem;
+  /* width: 100%; */
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  padding: 1rem;
 }
 
 .map__addFav {
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .map__addFav--add,
 .map__addFav--fav {
-	z-index: 10;
+  z-index: 10;
 }
 
 .map__chat {
-	justify-self: flex-end;
-	z-index: 10;
+  justify-self: flex-end;
+  z-index: 10;
 }
 
 .sidebar {
-	position: absolute;
-	right: -50vw;
-	height: 100%;
-	background-color: rgb(255, 255, 255);
-	border-radius: 1rem 0 0 1rem;
-	transition: all 0.2s ease-in-out;
-	box-shadow: -0.3rem 0 0.3rem rgb(0, 0, 0, 0.1);
-	max-width: 800px;
-	width: 50vw;
-	z-index: 10;
+  position: absolute;
+  right: -50vw;
+  width: 50vw;
+  height: 100%;
+  max-width: 800px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 1rem 0 0 1rem;
+  transition: all 0.2s ease-in-out;
+  box-shadow: -0.3rem 0 0.3rem rgb(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.sidebar--show {
+  right: 0vw;
 }
 
 .sidebar__toggle {
-	position: absolute;
-	top: 95%;
-	left: -3rem;
-	z-index: 10;
+  position: absolute;
+  top: 95%;
+  left: -3rem;
+  z-index: 10;
 }
 
 .sidebar__content {
-	overflow-y: scroll;
+  overflow-y: scroll;
 }
 
 .bi-arrow-bar-left {
-	transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .accordion-button:not(.collapsed) {
-	background-color: transparent !important;
-	color: black !important;
+  background-color: transparent !important;
+  color: black !important;
 }
 
 .alert {
-	position: absolute !important;
-	bottom: 1rem;
-	right: 1rem;
-	z-index: 11;
+  position: absolute !important;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 11;
+}
+
+@media only screen and (max-width: 600px) {
+  #map {
+    height: 100%;
+  }
+
+  .map {
+    display: block;
+    overflow: hidden;
+  }
+  .map__container {
+    position: relative;
+  }
+  .map__container--toggle {
+    height: 45vh;
+  }
+
+  .map__search {
+    position: absolute;
+    top: 0;
+  }
+
+  .map__buttons {
+    bottom: 80vh;
+    position: relative;
+    bottom: 12vh;
+  }
+
+  .sidebar {
+    /* position: relative; */
+    right: 0vw;
+    left: 0vw;
+    top: 95vh;
+    max-width: max-content;
+    width: max-content;
+    height: 55vh;
+    border-radius: 2rem 2rem 0 0;
+  }
+
+  .sidebar--show {
+    top: 44vh;
+  }
+
+  .sidebar__toggle {
+    top: -10vh;
+    left: 85vw;
+    z-index: 100;
+  }
+
+  .sidebar__content {
+    width: 100vw;
+    height: 100%;
+    border-radius: 1rem 1rem 0 0 !important;
+  }
 }
