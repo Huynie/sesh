@@ -81,12 +81,11 @@ const Hours = ({save}) => {
               <Button
                 key={idx}
                 id={day}
-                onClick={(e) => toggleDay(day)}
-                color="primary"
+                onClick={() => toggleDay(day)}
                 outline
                 active={hours[day] ? true : false}
                 children={day} 
-                className="px-0"
+                className="days__button px-0"
               />
             )
           })

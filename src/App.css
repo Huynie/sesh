@@ -56,14 +56,13 @@ nav {
   z-index: 10;
   height: 2rem;
   width: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: absolute;
   left: 2rem;
-  bottom: 0;
+  bottom: 2rem;
   padding: 1rem;
-  background-color: #ff9839 !important;
+  background-color: #ff8c39 !important;
+  box-shadow: -0.1rem 0.1rem 0.2rem rgb(0, 0, 0, 0.2);
+  border: none !important;
   color: white;
 }
 
@@ -90,8 +89,12 @@ nav {
 }
 
 .sidebar__toggle {
+  box-shadow: -0.1rem 0.1rem 0.2rem rgb(0, 0, 0, 0.2);
+  background-color: white !important;
+  border: none !important;
+  color: black !important;
   position: absolute;
-  top: 95%;
+  top: 95vh;
   left: -3rem;
   z-index: 10;
   height: 2rem;
@@ -103,7 +106,7 @@ nav {
 }
 
 .bi-arrow-bar-left {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .accordion-button:not(.collapsed) {
@@ -118,6 +121,30 @@ nav {
   z-index: 11;
 }
 
+.days__button {
+  color: #ff8c39 !important;
+  border-color: #ff8c39 !important;
+  text-transform: capitalize;
+  z-index: 1 !important;
+}
+
+.days__button:active,
+.days__button:hover,
+.btn-add,
+.active {
+  background-color: #ff8c39 !important;
+  color: white !important;
+  z-index: 1 !important;
+}
+
+.days__button:focus,
+input:focus,
+select:focus {
+  outline: 3px solid #fec297 !important;
+  box-shadow: none !important;
+  z-index: 10 !important;
+}
+
 @media only screen and (max-width: 600px) {
   /* #map {
     height: 110%;
@@ -126,12 +153,13 @@ nav {
   .map {
     display: block;
     overflow: hidden;
-    height: 93vh;
+    /* height: 93vh; */
   }
   .map__container {
     position: relative;
   }
   .map__container--toggle {
+    transition: all 0.2s ease-in-out;
     height: 45vh;
   }
 
@@ -149,7 +177,7 @@ nav {
     /* position: relative; */
     right: 0vw;
     left: 0vw;
-    top: 93vh;
+    top: 100vh;
     max-width: max-content;
     width: max-content;
     height: 55vh;

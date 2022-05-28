@@ -34,7 +34,7 @@ const AddSpotModal = ({isOpen, toggle, submit, setAutocomplete}) => {
       </ModalBody>
       <ModalFooter>
         <Button 
-          color={"primary"}
+          color={"add"}
           size="sm"
           onClick={() => submit(spot, hours)}
         >Add
