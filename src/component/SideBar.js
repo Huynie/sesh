@@ -22,7 +22,7 @@ import {
 const SideBar = React.forwardRef( ({data}, ref) => {
   const [toggle, setToggle] = React.useState(false);
   const [tooltipToggle, setTooltipToggle] = React.useState(false);
-  const [accordionId, setAccordionId] = React.useState();
+  const [accordionId, setAccordionId] = React.useState("1");
   const mobile = window.matchMedia('(max-width: 600px)');
   const sidebarShow = toggle ? "sidebar--show" : "";
   const [degrees, setDegrees] = React.useState("0");
@@ -83,7 +83,7 @@ const SideBar = React.forwardRef( ({data}, ref) => {
       >Please pick a spot!</Tooltip>
       <Card className="sidebar__content text-secondary border-0" outline={false} >
         <CardBody style={{flex: 0}}>
-          <CardTitle tag="h5" className="text-center">{data?.name ? data.name : "Spot Name"}</CardTitle>
+          <CardTitle tag="h5" className="text-center mb-3">{data?.name ? data.name : "Spot Name"}</CardTitle>
           <CardText tag="p" className="fs-6">{data?.address || "address"}</CardText>
           <CardText tag="p">{data?.phone ? data.phone : "Phone Number"}</CardText>
           <CardText tag="p">Host: {data?.host ? data.host : "Host"}</CardText>

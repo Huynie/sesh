@@ -73,10 +73,9 @@ nav {
 
 .sidebar {
   position: absolute;
-  right: -50vw;
-  width: 50vw;
+  right: -400px;
+  width: 400px;
   height: 100%;
-  max-width: 800px;
   background-color: rgb(255, 255, 255);
   border-radius: 1rem 0 0 1rem;
   transition: all 0.2s ease-in-out;

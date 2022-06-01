@@ -6,7 +6,7 @@ import {
   Alert
 } from 'reactstrap';
 import SideBar from './SideBar';
-import Search from './Search';
+import SearchBar from './SearchBar';
 import AddSpotModal from './AddSpotModal';
 import useGMAP from '../hooks/useGMAP';
 import useAPI from '../hooks/useAPI';
@@ -30,8 +30,9 @@ const MapComponent = ({center, zoom}) => {
     }, 3000);
   };
 
-  const addSpot = async (reqSpot, reqHours) => {
+  const addSpot = async (reqSpot, reqHours, validate) => {
     try {
+      validate();
       const data = await api.addSpotAndHours(reqSpot, reqHours);
       setSpots(prev => [...prev, data]);
       setAddSpotModalToggle(!addSpotModalToggle);
@@ -47,7 +48,7 @@ const MapComponent = ({center, zoom}) => {
       <div className="map__container">
         <div ref={mapRef} id="map"></div>
       </div>
-      <Search setAutocomplete={setAutocomplete}/>
+      <SearchBar setAutocomplete={setAutocomplete}/>
       <SideBar 
         data={sidebarData}
         ref={sidebarRefs}

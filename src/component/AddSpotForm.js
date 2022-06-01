@@ -2,14 +2,16 @@ import React from 'react';
 import {
   Form,
   FormGroup,
+  FormFeedback,
   Input,
   InputGroup,
+  InputGroupText,
   Label,
-  Col
+  Col,
 } from 'reactstrap';
 import Hours from './Hours';
 
-const AddSpotForm = ({spot, setSpot, setHours, setAutocomplete}) => {
+const AddSpotForm = ({spot, setSpot, setHours, setAutocomplete, invalid}) => {
   const addressRef = React.useRef();
 
   React.useEffect(()=>{
@@ -21,19 +23,36 @@ const AddSpotForm = ({spot, setSpot, setHours, setAutocomplete}) => {
     }
   }, [addressRef, setAutocomplete, spot, setSpot]);
 
+  const phoneEntryFormat = (e) => {
+    if(spot.phone.length === 0) {
+      setSpot({...spot, phone:`(${e.target.value}`});
+      return
+    }
+    if(spot.phone.length === 3) {
+      setSpot({...spot, phone:`${e.target.value}) `});
+      return
+    }
+    if(spot.phone.length === 8) {
+      setSpot({...spot, phone:`${e.target.value}-`});
+      return
+    }
+    setSpot({...spot, phone: e.target.value})
+  }
+
   return (
     <Form>
       <FormGroup>
-        <Label>Name</Label>
+        <Label>Spot Name</Label>
         <Input
           id="name"
           aria-label="name"
           type="text"
-          placeholder="What is the Name?"
+          placeholder="Name of this spot?"
           onChange={e => setSpot({ ...spot, name: e.target.value })}
           value={spot.name}
-          required
-        />
+          invalid={invalid.name}
+          />
+        <FormFeedback>Please fill out this field correctly.</FormFeedback>
       </FormGroup>
       <FormGroup>
         <Label>Address</Label>
@@ -42,58 +61,67 @@ const AddSpotForm = ({spot, setSpot, setHours, setAutocomplete}) => {
           id="address"
           aria-label="address"
           type="text"
-          placeholder="Where is this spot at?"
+          placeholder="Where is this?"
           onChange={e => setSpot({ ...spot, address: e.target.value })}
           value={spot.address}
-          required
+          invalid={invalid.address}
         />
-      </FormGroup>
-      <FormGroup>
-        <Label>Phone Number</Label>
-        <Input
-          id="phone"
-          aria-label="phone number input"
-          type="phone"
-          placeholder="Enter An phone number"
-          onChange={e => setSpot({...spot, phone: e.target.value})}
-          value={spot.phone}
-          maxLength={80}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label>Host</Label>
-        <Input
-          id="host"
-          aria-label="host"
-          type="text"
-          placeholder="Who is the host of this spot"
-          onChange={e => setSpot({...spot, host: e.target.value})}
-          value={spot.host}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Hours save={setHours}/>
+        <FormFeedback>Please fill out this field correctly.</FormFeedback>
       </FormGroup>
       <FormGroup>
         <InputGroup>
-          <Col className="px-2">
-            <Label for="price">Price</Label>
+          <Col className="pe-2">
+            <Label>Phone</Label>
             <Input
-              id="price"
-              aria-label="price"
-              type="text"
-              placeholder="How much does practice cost?"
-              onChange={e => setSpot({...spot, price: e.target.value})}
-              value={spot.price}
+              id="phone"
+              aria-label="phone number input"
+              type="phone"
+              placeholder="Host phone number?"
+              onChange={phoneEntryFormat}
+              value={spot.phone}
+              maxLength={14}
+              invalid={invalid.phone}
             />
+            <FormFeedback>Please fill out this field correctly.</FormFeedback>
           </Col>
-          <Col className="px-2">
+          <Col className="ps-2">
+            <Label>Host</Label>
+            <Input
+              id="host"
+              aria-label="host"
+              type="text"
+              placeholder="Name of host?"
+              onChange={e => setSpot({...spot, host: e.target.value})}
+              value={spot.host}
+              invalid={invalid.host}
+            />
+            <FormFeedback>Please fill out this field correctly.</FormFeedback>
+          </Col>
+        </InputGroup>
+      </FormGroup>
+      <FormGroup>
+        <InputGroup>
+          <Col className="pe-2">
+            <Label for="price">Price</Label>
+            <InputGroup>
+              <InputGroupText>$</InputGroupText>
+              <Input
+                id="price"
+                aria-label="price"
+                type="number"
+                placeholder="Cost per practice?"
+                onChange={e => setSpot({...spot, price: e.target.value})}
+                value={spot.price}
+              />
+            </InputGroup>
+          </Col>
+          <Col className="ps-2">
             <Label for="waiver">Waiver</Label>
             <Input
               id="waiver"
               aria-label="waiver"
               type="select"
-              placeholder="How much does practice cost?"
+              // placeholder="How much does practice cost?"
               onChange={e => setSpot({...spot, waiver: e.target.value})}
               value={spot.waiver}
             >
@@ -102,6 +130,9 @@ const AddSpotForm = ({spot, setSpot, setHours, setAutocomplete}) => {
             </Input>
           </Col>
         </InputGroup>
+      </FormGroup>
+      <FormGroup>
+        <Hours save={setHours}/>
       </FormGroup>
     </Form>
   )
