@@ -1,18 +1,3 @@
-.App h1::before {
-  content: "# ";
-  color: #2979ff;
-}
-
-Footer {
-  height: 20vh;
-  background-color: gray;
-}
-/* 
-nav {
-	height: 5vh;
-	background-color: gray;
-} */
-
 .home {
   width: auto;
 }
@@ -41,10 +26,6 @@ nav {
   transition: all 0.2s ease-in-out;
 }
 
-/* .map__container--toggle {
-	height: 100vh;
-} */
-
 .map__search {
   align-self: flex-start;
   z-index: 10;
@@ -65,11 +46,6 @@ nav {
   border: none !important;
   color: white;
 }
-
-/* .map__chat {
-  justify-self: flex-end;
-  z-index: 10;
-} */
 
 .sidebar {
   position: absolute;
@@ -145,14 +121,9 @@ select:focus {
 }
 
 @media only screen and (max-width: 600px) {
-  /* #map {
-    height: 110%;
-  } */
-
   .map {
     display: block;
     overflow: hidden;
-    /* height: 93vh; */
   }
   .map__container {
     position: relative;
@@ -173,7 +144,6 @@ select:focus {
   }
 
   .sidebar {
-    /* position: relative; */
     right: 0vw;
     left: 0vw;
     top: 100vh;
