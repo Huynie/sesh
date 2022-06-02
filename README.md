@@ -27,7 +27,7 @@ npm build
 ## Location Permission
 
 <p align="center">
-  <img src="../master/screenshots/permission.png" width="300px"/>
+  <img src="../master/screenshots/permission.png" width="500px"/>
 </p>
 <p width="500px">If permission is granted, map will move to your current city, otherwise it will default to Bronx, New York ( the birthplace of hiphop! )</p>
 
@@ -39,6 +39,8 @@ npm build
   <img src="../master/screenshots/tooltip.png" width="300px"/>
 </p>
 Tooltip will prompt to select a spot first before info side bar can be deployed.
+
+<br/>
 
 <p align="center">
   <img src="../master/screenshots/sidebar.png" width="300px"/>
