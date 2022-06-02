@@ -25,11 +25,11 @@ npm build
 <br/>
 
 ## Location Permission
-
+If permission is granted, map will move to your current city, otherwise it will default to Bronx, New York ( the birthplace of hiphop! )
+<img src="../master/screenshots/permission.png" width="500px"/>
 <p align="center">
-  <img src="../master/screenshots/permission.png" width="500px"/>
+
   <br clear="left"/>
-  If permission is granted, map will move to your current city, otherwise it will default to Bronx, New York ( the birthplace of hiphop! )
 </p>
 
 <br/>
