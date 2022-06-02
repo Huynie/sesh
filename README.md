@@ -24,7 +24,7 @@ npm build
 
 <br/>
 
-### Location Permission
+## Location Permission
 
 <p align="center">
   <img src="../master/screenshots/permission.png" width="500px"/>
@@ -33,7 +33,7 @@ npm build
 
 <br/>
 
-### Info Display
+## Info Display
 
 <p align="center">
   <img src="../master/screenshots/tooltip.png" width="500px"/>
@@ -48,7 +48,7 @@ It is toggleable via the arrow button bottom right of the screen or by clicking 
 
 <br/>
 
-### Adding A New Spot
+## Adding A New Spot
 
 <p align="center">
   <img src="../master/screenshots/modal.png" width="500px"/>
