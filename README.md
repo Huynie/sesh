@@ -25,18 +25,16 @@ npm build
 <br/>
 
 ## Location Permission
-If permission is granted, map will move to your current city, otherwise it will default to Bronx, New York ( the birthplace of hiphop! )
-<img src="../master/screenshots/permission.png" width="500px"/>
-<p align="center">
-
+<p align="left">
+  <img src="../master/screenshots/permission.png" width="500px"/>
   <br clear="left"/>
+  If permission is granted, map will move to your current city, otherwise it will default to Bronx, New York ( the birthplace of hiphop! )
 </p>
 
 <br/>
 
 ## Info Display
-
-<p align="center">
+<p align="left">
   <img src="../master/screenshots/tooltip.png" width="300px"/>
   <br clear="left"/>
   Tooltip will prompt to select a spot first before info side bar can be deployed.
@@ -44,7 +42,7 @@ If permission is granted, map will move to your current city, otherwise it will 
 
 <br/>
 
-<p align="center">
+<p align="left">
   <img src="../master/screenshots/sidebar.png" width="300px"/>
   <br clear="left"/>
   Clicking on a marker will populate side bar with data and deploy it.
@@ -55,8 +53,7 @@ If permission is granted, map will move to your current city, otherwise it will 
 <br/>
 
 ## Adding A New Spot
-
-<p align="center">
+<p align="left">
   <img src="../master/screenshots/modal.png" width="300px"/>
   <br clear="left"/>
   Clicking the plus button will bring up the modal to add a new spot.
