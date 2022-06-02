@@ -28,8 +28,9 @@ npm build
 
 <p align="center">
   <img src="../master/screenshots/permission.png" width="500px"/>
+  <br clear="left"/>
+  If permission is granted, map will move to your current city, otherwise it will default to Bronx, New York ( the birthplace of hiphop! )
 </p>
-<p width="500px">If permission is granted, map will move to your current city, otherwise it will default to Bronx, New York ( the birthplace of hiphop! )</p>
 
 <br/>
 
