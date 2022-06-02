@@ -38,16 +38,19 @@ npm build
 
 <p align="center">
   <img src="../master/screenshots/tooltip.png" width="300px"/>
+  <br clear="left"/>
+  Tooltip will prompt to select a spot first before info side bar can be deployed.
 </p>
-Tooltip will prompt to select a spot first before info side bar can be deployed.
 
 <br/>
 
 <p align="center">
   <img src="../master/screenshots/sidebar.png" width="300px"/>
+  <br clear="left"/>
+  Clicking on a marker will populate side bar with data and deploy it.
+  <br/>
+  It is toggleable via the arrow button bottom right of the screen or by clicking the same marker again.
 </p>
-Clicking on a marker will populate side bar with data and deploy it.
-It is toggleable via the arrow button bottom right of the screen or by clicking the same marker again.
 
 <br/>
 
@@ -55,8 +58,11 @@ It is toggleable via the arrow button bottom right of the screen or by clicking 
 
 <p align="center">
   <img src="../master/screenshots/modal.png" width="300px"/>
+  <br clear="left"/>
+  Clicking the plus button will bring up the modal to add a new spot.
+  <br/>
+  The entire map component will rerender to update with new spot marker.
 </p>
-Clicking the plus button will bring up the modal to add a new spot.
-The entire map component will rerender to update with new spot marker.
+
 
 #### only available for US cities for now, new features to come!
