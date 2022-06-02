@@ -4,6 +4,24 @@
 
 A web app listing practice spots for breakdancers. features include relvant information per spots, in-app liability waiver signing, spot search, and more to come. Built using Google maps api, ReactJS, PostgresSQL, NodeJS, AWS Elastic beanstalk, S3 Bucket, API gateway.
 
+### Project setup
+
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+
+```
+npm start
+```
+
+### Compiles and minifies for production
+
+```
+npm build
+```
+
 <br/>
 
 ### Location Permission
