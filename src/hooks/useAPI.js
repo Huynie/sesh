@@ -1,7 +1,8 @@
 import Axios from 'axios';
-import {useCallback} from 'react';
+import {useCallback, useState} from 'react';
 
 const useAPI = () => {
+  // const [combinedData, setCombinedData] = useState([]);
   const getSpots = useCallback(async () => {
     try {
       const spots = await Axios({
