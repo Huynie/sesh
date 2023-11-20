@@ -103,7 +103,7 @@ const useGMAP = (
 
       googleScript.addEventListener("load", () => loadFirst());
     }
-  }, [getMap, spotsData]);
+  }, [getMap]);
 
   useEffect(() => {
     if (spots) {
